@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    <div class="card"> 
+        <h1> გამოიცანით სიტყვები</h1> 
+        <p> 
+              <b>მინიშნება:</b> რომელი პროგრამული ენაა?
+          </p> 
+        <p id="displayWord"></p> 
+        <p>ჩაწერე სიტყვა: 
+  
+            <input type="text" 
+                   maxlength="1" 
+                   id="letter-input"> 
+        </p> 
+        <button id="but" onclick="guessLetter()"> 
+              დამატება
+          </button> 
+    </div> 
+
+
+    <script>
+// script.js 
+
+// Array of words to choose from 
+const words = [ 
+	"java", 
+	"javascript", 
+	"python", 
+	"pascal", 
+	"ruby", 
+	"perl", 
+	"swift", 
+	"kotlin", 
+]; 
+
+// Geting random word from the list 
+let randomIndex = Math.floor(Math.random() * words.length); 
+let selectedWord = words[randomIndex]; 
+console.log(selectedWord); 
+
+// To store the already guessed letters 
+let guessedlist = []; 
+
+// For initial display Word 
+let displayWord = ""; 
+for (let i = 0; i < selectedWord.length; i++) { 
+	displayWord += "_ "; 
+} 
+document.getElementById("displayWord").textContent = displayWord; 
+
+// Function to check Guessed letter 
+function guessLetter() { 
+	let inputElement = 
+		document.getElementById("letter-input"); 
+
+	// To check empty input 
+	if (!inputElement.value) { 
+		alert("ყუთი ცარიელია. გთხოვთ ჩაწეროთ სიტყვა"); 
+		return; 
+	} 
+
+	let letter = inputElement.value.toLowerCase(); 
+
+	// Clear the input field 
+	inputElement.value = ""; 
+
+	// Check if the letter has already been guessed 
+	if (guessedlist.includes(letter)) { 
+		alert("You have already guessed that letter!"); 
+		return; 
+	} 
+
+	// Add the letter to the guessed letters array 
+	guessedlist.push(letter); 
+
+	// Update the word display based on the guessed letters 
+	let updatedDisplay = ""; 
+	let allLettersGuessed = true; 
+	for (let i = 0; i < selectedWord.length; i++) { 
+		if (guessedlist.includes(selectedWord[i])) { 
+			updatedDisplay += selectedWord[i] + " "; 
+		} else { 
+			updatedDisplay += "_ "; 
+			allLettersGuessed = false; 
+		} 
+	} 
+	document.getElementById("displayWord") 
+		.textContent = updatedDisplay; 
+
+	// Check if all letters have been guessed 
+	if (allLettersGuessed) { 
+		alert("Congratulations! You guessed the word correctly!"); 
+	} 
+}
+
+
+
+    </script>
+
+
+
+
+
+
+<style>
+
+/* style.css */
+
+/* Styling for the heading */
+h1 { 
+	background-color: rgb(231, 231, 231); 
+	color: green; 
+	font-size: xx-large; 
+	padding: 2%; 
+	/* width: 70vh; */
+} 
+
+/* Style for the card and border */
+.card { 
+	min-width: 30%; 
+	width: 50vh; 
+	min-height: 30vh; 
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); 
+	transition: 0.3s; 
+	border-radius: 5px; 
+	margin: auto; 
+	padding: 2%; 
+} 
+
+/* Font and display style for complete body */
+body { 
+	display: flex; 
+	text-align: center; 
+	font-family: "Gill Sans", 
+				"Gill Sans MT", 
+				Calibri, "Trebuchet MS", 
+				sans-serif; 
+                background-color: rgb(247, 237, 237);
+} 
+
+/* Adding style for input box */
+input { 
+	width: 30px; 
+	padding: 1%; 
+	font-size: larger; 
+	text-align: center; 
+	margin-left: 2%; 
+} 
+
+/* Adding style for display word*/
+#displayWord { 
+	font-size: xx-large; 
+}
+
+
+#but{
+background-color: rgb(79, 79, 82);
+border:solid black 3px;
+box-shadow: inset;
+
+
+
+}
+
+
+</style>
+
+
+
+</body>
+</html>
